@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LEADER_GAMES | صفحة اللعبة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+    .fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+    .fact small{display:block;color:var(--mute);font-size:.78rem}
+    .about{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;color:var(--text)}
+    h2{margin:28px 0 4px;font-size:1.2rem}
+    .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .back{display:inline-block;margin:18px 0 0;color:var(--accent2)}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="logo" href="./">LEADER<span>_GAMES</span></a>
+      <a class="tg" style="margin:0" href="https://t.me/leader_games" target="_blank" rel="noopener">📢 Telegram</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <a class="back" href="./">← كل الأخبار</a>
+    <section class="hero">
+      <h1 id="title">…</h1>
+      <p id="tagline"></p>
+    </section>
+
+    <div class="facts" id="facts"></div>
+    <div class="about" id="about"></div>
+    <div class="links" id="links"></div>
+
+    <h2>آخر الأخبار عن اللعبة</h2>
+    <p class="meta" style="color:var(--mute);margin:0">من IGN وGameSpot وEurogamer وGamesRadar+ وKotaku وGematsu</p>
+    <div id="grid" class="grid"></div>
+    <p id="empty" class="empty" hidden>لا توجد أخبار عن هذه اللعبة في المصادر حالياً. تابع قناتنا على Telegram ليصلك أي جديد.</p>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p><strong>LEADER_GAMES</strong> — من إدارة <strong>leader-vi7</strong> · <a href="https://t.me/leader_games" target="_blank" rel="noopener">Telegram: @leader_games</a></p>
+      <p>الأخبار لأصحابها الأصليين، نعرض العنوان وملخصاً قصيراً مع رابط المصدر.</p>
+    </div>
+  </footer>
+
+<script>
+(() => {
+  const GAMES = {
+    "free-fire": {
+      name: "Free Fire (فري فاير)",
+      tagline: "لعبة باتل رويال للموبايل",
+      facts: [["النوع", "باتل رويال"], ["المنصة", "Mobile (Android / iOS)"], ["الناشر", "Garena"], ["المطوّر", "111 Dots Studio"], ["الإطلاق", "2017"]],
+      about: "لعبة باتل رويال خفيفة للموبايل، يتنافس فيها اللاعبون على جزيرة حتى يبقى لاعب أو فريق واحد. وتتوفر نسخة Free Fire MAX برسومات أعلى جودة.",
+      keywords: ["free fire", "freefire", "garena"],
+      links: [["الموقع الرسمي", "https://ff.garena.com/"]]
+    },
+    "pubg": {
+      name: "PUBG (ببجي)",
+      tagline: "لعبة باتل رويال على PC والكونسول والموبايل",
+      facts: [["النوع", "باتل رويال"], ["المنصة", "PC · Console · Mobile"], ["الشركة", "Krafton"], ["الإطلاق", "2017"]],
+      about: "من أشهر ألعاب الباتل رويال في العالم، يهبط فيها اللاعبون على خريطة كبيرة ويتقاتلون حتى النجاة. تتوفر منها نسخة PC وكونسول ونسخة موبايل.",
+      keywords: ["pubg", "battlegrounds", "krafton"],
+      links: [["الموقع الرسمي", "https://www.pubg.com/"]]
+    },
+    "efootball": {
+      name: "eFootball (إي فوتبول)",
+      tagline: "لعبة كرة القدم المجانية من كونامي",
+      facts: [["النوع", "كرة قدم"], ["المنصة", "PC · Console · Mobile"], ["الشركة", "Konami"], ["الإطلاق", "2021"]],
+      about: "لعبة كرة قدم من شركة كونامي (خليفة سلسلة PES)، تُلعب مجاناً مع مشتريات داخل اللعبة، وتتوفر على الحاسوب والكونسول والموبايل.",
+      keywords: ["efootball", "e-football", "konami", "pro evolution"],
+      links: [["الموقع الرسمي", "https://www.konami.com/efootball/"]]
+    }
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const key = new URLSearchParams(location.search).get("g") || "free-fire";
+  const game = GAMES[key] || GAMES["free-fire"];
+
+  document.title = game.name + " | LEADER_GAMES";
+  $("title").textContent = game.name;
+  $("tagline").textContent = game.tagline;
+  $("about").textContent = game.about;
+
+  game.facts.forEach(([k, v]) => {
+    const d = document.createElement("div");
+    d.className = "fact";
+    const s = document.createElement("small");
+    s.textContent = k;
+    d.append(s, document.createTextNode(v));
+    $("facts").appendChild(d);
+  });
+  game.links.forEach(([t, u]) => {
+    const a = document.createElement("a");
+    a.className = "chip";
+    a.style.display = "inline-block";
+    a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer";
+    a.textContent = "🔗 " + t;
+    $("links").appendChild(a);
+  });
+
+  const timeAgo = (iso) => {
+    const s = Math.max(1, (Date.now() - new Date(iso)) / 1000);
+    if (s < 3600) return `قبل ${Math.round(s / 60)} دقيقة`;
+    if (s < 86400) return `قبل ${Math.round(s / 3600)} ساعة`;
+    return `قبل ${Math.round(s / 86400)} يوم`;
+  };
+
+  fetch("data/news.json?t=" + Date.now(), { cache: "no-store" })
+    .then((r) => r.json())
+    .then((data) => {
+      const items = (data.items || []).filter((i) => {
+        const t = (i.title + " " + i.excerpt).toLowerCase();
+        return game.keywords.some((k) => t.includes(k));
+      });
+      $("empty").hidden = items.length > 0;
+      items.forEach((i) => {
+        const a = document.createElement("a");
+        a.className = "card"; a.href = i.link; a.target = "_blank"; a.rel = "noopener noreferrer";
+        const th = document.createElement("div");
+        th.className = "thumb";
+        if (i.image) th.style.backgroundImage = `url("${i.image.replace(/"/g, "%22")}")`;
+        const body = document.createElement("div");
+        body.className = "body";
+        const tags = document.createElement("div");
+        tags.className = "tags";
+        const src = document.createElement("span");
+        src.className = "tag src"; src.textContent = i.source;
+        tags.appendChild(src);
+        const h = document.createElement("h3"); h.textContent = i.title;
+        const p = document.createElement("p"); p.textContent = i.excerpt;
+        const d = document.createElement("span"); d.className = "date"; d.textContent = timeAgo(i.date);
+        body.append(tags, h, p, d);
+        a.append(th, body);
+        $("grid").appendChild(a);
+      });
+    })
+    .catch(() => { $("empty").hidden = false; });
+})();
+</script>
+</body>
+  </html>
