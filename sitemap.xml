@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://leader-vi7-gif.github.io/leader-vi7-games/</loc>
-    <changefreq>hourly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://leader-vi7-gif.github.io/leader-vi7-games/</loc><changefreq>hourly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://leader-vi7-gif.github.io/leader-vi7-games/game.html?g=free-fire</loc><priority>0.7</priority></url>
+  <url><loc>https://leader-vi7-gif.github.io/leader-vi7-games/game.html?g=pubg</loc><priority>0.7</priority></url>
+  <url><loc>https://leader-vi7-gif.github.io/leader-vi7-games/game.html?g=efootball</loc><priority>0.7</priority></url>
+  <url><loc>https://leader-vi7-gif.github.io/leader-vi7-games/about.html</loc><priority>0.3</priority></url>
+  <url><loc>https://leader-vi7-gif.github.io/leader-vi7-games/privacy.html</loc><priority>0.3</priority></url>
 </urlset>
