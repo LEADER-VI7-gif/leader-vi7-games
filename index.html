@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LEADER_GAMES | أخبار الألعاب لحظة بلحظة</title>
+  <meta name="author" content="leader-vi7">
+  <meta name="description" content="أحدث أخبار ألعاب الحاسوب والكونسول والموبايل من IGN وGameSpot وEurogamer وGamesRadar+ وKotaku وGematsu، تتحدث تلقائياً.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="logo" href="./">LEADER<span>_GAMES</span></a>
+      <input id="q" type="search" placeholder="ابحث عن لعبة أو خبر…" aria-label="بحث">
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>كل أخبار الألعاب في مكان واحد</h1>
+      <p>ملخصات قصيرة مع روابط المصادر الأصلية. تتحدث تلقائياً كل 30 دقيقة.</p>
+      <p class="meta">آخر تحديث: <span id="updated">…</span></p>
+    </section>
+
+    <nav class="filters" aria-label="المنصة">
+      <button class="chip on" data-p="all">الكل</button>
+      <button class="chip" data-p="pc">PC</button>
+      <button class="chip" data-p="console">Console</button>
+      <button class="chip" data-p="mobile">Mobile</button>
+    </nav>
+    <nav class="filters small" id="sources" aria-label="المصدر"></nav>
+
+    <div id="grid" class="grid" aria-live="polite"></div>
+    <p id="empty" class="empty" hidden>لا توجد نتائج مطابقة.</p>
+    <button id="more" class="more" hidden>عرض المزيد</button>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p><strong>LEADER_GAMES</strong> — من إدارة <strong>leader-vi7</strong>.</p>
+      <p>موقع تجميعي: نعرض العناوين وملخصاً قصيراً فقط، وكل الحقوق للمواقع الأصلية (IGN, GameSpot, Eurogamer, GamesRadar+, Kotaku, Gematsu). اضغط على أي خبر لقراءته كاملاً عند المصدر.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
