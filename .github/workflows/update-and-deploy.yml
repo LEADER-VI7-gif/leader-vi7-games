@@ -2,19 +2,19 @@ name: Update news and deploy
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # كل 30 دقيقة
-  workflow_dispatch:          # تشغيل يدوي من تبويب Actions
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
   push:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build-deploy:
@@ -34,6 +34,21 @@ jobs:
 
       - name: Fetch latest news
         run: python scripts/fetch_news.py
+
+      - name: Post new items to Telegram
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/post_telegram.py
+
+      - name: Save posted state
+        continue-on-error: true
+        run: |
+          git config user.name "leader-games-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add state/posted.json
+          git diff --cached --quiet || (git commit -m "Update posted state" && git pull --rebase && git push)
 
       - name: Prepare site folder
         run: |
