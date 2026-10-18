@@ -38,7 +38,7 @@
     <div class="links" id="links"></div>
 
     <h2>آخر الأخبار عن اللعبة</h2>
-    <p class="meta" style="color:var(--mute);margin:0">من IGN وGameSpot وEurogamer وGamesRadar+ وKotaku وGematsu</p>
+    <p class="meta" style="color:var(--mute);margin:0">المصادر: <bdi>IGN</bdi> · <bdi>GameSpot</bdi> · <bdi>Eurogamer</bdi> · <bdi>GamesRadar+</bdi> · <bdi>Kotaku</bdi> · <bdi>Gematsu</bdi></p>
     <div id="grid" class="grid"></div>
     <p id="empty" class="empty" hidden>لا توجد أخبار عن هذه اللعبة في المصادر حالياً. تابع قناتنا على Telegram ليصلك أي جديد.</p>
   </main>
@@ -57,7 +57,7 @@
       name: "Free Fire (فري فاير)",
       tagline: "لعبة باتل رويال للموبايل",
       facts: [["النوع", "باتل رويال"], ["المنصة", "Mobile (Android / iOS)"], ["الناشر", "Garena"], ["المطوّر", "111 Dots Studio"], ["الإطلاق", "2017"]],
-      about: "لعبة باتل رويال خفيفة للموبايل، يتنافس فيها اللاعبون على جزيرة حتى يبقى لاعب أو فريق واحد. وتتوفر نسخة Free Fire MAX برسومات أعلى جودة.",
+      about: "لعبة باتل رويال خفيفة للموبايل، يتنافس فيها اللاعبون على جزيرة حتى يبقى لاعب أو فريق واحد. وتتوفر نسخة Free\u00a0Fire\u00a0MAX برسومات أعلى جودة.",
       keywords: ["free fire", "freefire", "garena"],
       links: [["الموقع الرسمي", "https://ff.garena.com/"]]
     },
@@ -93,7 +93,9 @@
     d.className = "fact";
     const s = document.createElement("small");
     s.textContent = k;
-    d.append(s, document.createTextNode(v));
+    const b = document.createElement("bdi");
+    b.textContent = v;
+    d.append(s, b);
     $("facts").appendChild(d);
   });
   game.links.forEach(([t, u]) => {
@@ -145,4 +147,4 @@
 })();
 </script>
 </body>
-  </html>
+</html>
